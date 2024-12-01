@@ -11,7 +11,7 @@ export class AluguelController {
     constructor(private readonly aluguelService: AluguelService) {}
 
     @Post()
-    create(@Body() createAluguelDto: CreateAluguelDto): Promise<Aluguel> {
+    create(@Body() createAluguelDto: CreateAluguelDto): Promise<string> {
         return this.aluguelService.create(createAluguelDto);
     }
   

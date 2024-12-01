@@ -11,7 +11,7 @@ export class VeiculoService {
 
 constructor(
     @InjectRepository(Veiculo)
-    private veiculoRepository: Repository<Veiculo>,
+        private veiculoRepository: Repository<Veiculo>,
     ) {}
 
     async create(createVeiculoDto: CreateVeiculoDto): Promise<Veiculo> {
