@@ -49,7 +49,7 @@ export class AluguelService {
         const aluguel: Aluguel = await this.aluguelRepository.findOne({where: {idViagem: idViagem}});
     
         if (!aluguel) {
-            throw new HttpException('viagem nao registrada', HttpStatus.BAD_REQUEST);
+            throw new HttpException('viagem nao registrada', HttpStatus.NOT_FOUND);
         }
 
         const {avaliacao, dataChegada, dataSaida, nomeUsuario, quilometragemRodada, veiculoId} = updateAluguelDto
@@ -84,7 +84,7 @@ export class AluguelService {
             veiculo.qtdAvaliacoes = aluguelList.length - 1;
             veiculo.mediaAvaliacoes = this.calcularNovaMedia(veiculo.mediaAvaliacoes, veiculo.qtdAvaliacoes, 0);
         }
-        
+
         await this.aluguelRepository.delete(idViagem);
         await this.veiculoRepository.save(veiculo);
 

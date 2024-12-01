@@ -26,7 +26,7 @@ constructor(
     async findAll(): Promise<Veiculo[] | { msg: string ; data: Veiculo[]; }> {
         const veiculosList: Veiculo[] = await this.veiculoRepository.find();
         if (veiculosList.length == 0){
-            return {msg: 'lista vazia', data: veiculosList}
+            throw new HttpException('recurso nao encontrado', HttpStatus.NOT_FOUND);
         }
         return {msg: 'lista obtida', data: veiculosList}
     }
@@ -34,7 +34,7 @@ constructor(
     async findOne(veiculoId: number): Promise<Veiculo | { msg: string ; data: Veiculo; }>  {
         const veiculo: Veiculo = await this.veiculoRepository.findOne({where : {veiculoId: veiculoId}});
         if (!veiculo){
-            return {msg: 'lista vazia', data: veiculo}
+            throw new HttpException('recurso nao encontrado', HttpStatus.NOT_FOUND);
         }
         return {msg: 'Item obtido', data: veiculo}
     }
